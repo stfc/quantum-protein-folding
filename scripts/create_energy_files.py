@@ -1,6 +1,11 @@
 """This script creates interaction energy files for protein folding side chain optimisation using PyRosetta."""
 
+import argparse
+import contextlib
+import io
 from pathlib import Path
+import pandas as pd
+import pyrosetta
 from pyrosetta import init, pose_from_pdb, get_score_function
 from pyrosetta.rosetta.core.pack.task import TaskFactory
 from pyrosetta.rosetta.core.pack.rotamer_set import RotamerSets
@@ -9,12 +14,6 @@ from pyrosetta.rosetta.protocols.relax import FastRelax
 from path_setup import load_project_root
 
 load_project_root()
-
-import pandas as pd
-import argparse
-import pyrosetta
-import contextlib
-import io
 
 
 from quantum_protein_folding.quantum_protein_folding.config import (
@@ -35,14 +34,14 @@ def parse_args():
         "-r",
         "--num_rot",
         type=int,
-        default=10,
+        required=True,
         help="Number of rotamers to record per residue",
     )
     parser.add_argument(
         "-i",
         "--index",
         type=int,
-        default=10,
+        required=True,
         help="Starting index for rotamer selection",
     )
     return parser.parse_args()
@@ -166,11 +165,6 @@ def main():
         f"{PYROSETTA_ENERGY_FILES_DIR}/{args.num_rot}rot_{num_res}res_one_body_terms.csv",
         index=False,
     )
-
-    df_two_body.assign(abs_E=df_two_body["E_ij"].abs()).nlargest(2, "abs_E").drop(
-        columns=["abs_E"]
-    ).to_csv(f"{PYROSETTA_ENERGY_FILES_DIR}/top_two_body_terms.csv", index=False)
-
     print("Energy data saved successfully.")
 
 

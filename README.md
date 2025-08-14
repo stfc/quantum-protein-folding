@@ -8,7 +8,15 @@
 2. Install PyRosetta within your virtual environment.
 3. Run the script to generate rotamer energy files:
 
-   ```
-   python scripts/create_energy_files.py -p <pdb_filename> -r <num_rotamers> -i <starting_rotomer_index>
-   ```
-   Please refer to `scripts/create_energy_files.py` for more details including information on command line arguments.
+```
+python scripts/create_energy_files.py -p <pdb_filename> -r <num_rotamers> -i <starting_rotomer_index>
+```
+Please refer to `scripts/create_energy_files.py` for more details including information on command line arguments.
+
+### Calculating exact energies of bitstrings for benchmarking
+
+The exact energies can be found by brute-force search over all allowed bitstrings. To do so, run
+```
+python scripts/calculate_bitstring_energies.py -res <num_res> -rot <num_rot>
+```
+The energy distributions are recorded in `json` format, and saved to `data/processed/exact` directory.
