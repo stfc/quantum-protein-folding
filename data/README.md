@@ -6,7 +6,7 @@
 
 This directory contains the data files for proteins, stored in the [Protein Data Bank format](https://www.rcsb.org).
 
-### `processed` data
+## `processed` data
 
 ### `exact` bitstring energies
 

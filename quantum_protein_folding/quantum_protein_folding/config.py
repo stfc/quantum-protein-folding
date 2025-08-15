@@ -20,3 +20,8 @@ PYROSETTA_ENERGY_IMMUTABLE_FILES_DIR = PYROSETTA_DIR / "pyrosetta_energy_files_i
 
 # exact data
 EXACT_ENERGY_DATA_DIR = PROCESSED_DATA_DIR / "exact"
+
+# qaoa data
+QAOA_DIR = PROCESSED_DATA_DIR / "qaoa"
+MPS_QAOA_FILE = QAOA_DIR / "mps-qaoa.csv"
+SV_QAOA_FILE = QAOA_DIR / "sv-qaoa.csv"

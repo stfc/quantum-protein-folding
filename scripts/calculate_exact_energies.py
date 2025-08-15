@@ -5,7 +5,7 @@ from path_setup import load_project_root
 
 load_project_root()
 
-from quantum_protein_folding.quantum_protein_folding.processing import (
+from quantum_protein_folding.quantum_protein_folding.bitstrings import (
     generate_bitstrings,
     calculate_bitstring_energies,
 )
@@ -54,7 +54,7 @@ def main():
     filename = f"res-{num_res}-rot-{num_rot}.json"
     file_path = os.path.join(EXACT_ENERGY_DATA_DIR, filename)
 
-    with open(file_path, "w") as f:
+    with open(file_path, "w", encoding='utf-8') as f:
         json.dump(energies, f, indent=4)
 
     print(f"Bitstring energies saved to {file_path}")
