@@ -54,7 +54,7 @@ def main():
     filename = f"res-{num_res}-rot-{num_rot}.json"
     file_path = os.path.join(EXACT_ENERGY_DATA_DIR, filename)
 
-    with open(file_path, "w", encoding='utf-8') as f:
+    with open(file_path, "w", encoding="utf-8") as f:
         json.dump(energies, f, indent=4)
 
     print(f"Bitstring energies saved to {file_path}")

@@ -54,9 +54,7 @@ class GroundStateTracker:
 
 def parse_args():
     """Command line arguments parser."""
-    parser = argparse.ArgumentParser(
-        description="Run quantum protein folding simulation with specified parameters."
-    )
+    parser = argparse.ArgumentParser(description="Run QAOA with specified parameters.")
     parser.add_argument(
         "-p", "--p", type=int, required=True, help="Number of ansatz layers for QAOA"
     )
