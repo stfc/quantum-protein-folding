@@ -1,3 +1,9 @@
+[![arXiv](https://img.shields.io/badge/arXiv-2507.19383-b31b1b.svg)](https://arxiv.org/abs/2507.19383)
+![GitHub Release](https://img.shields.io/github/v/release/stfc/quantum-protein-folding)
+![Python Language](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fstfc%2Fquantum-neo-dynamics&label=Repository%20Visits&countColor=%230c7ebe&style=flat&labelStyle=none)
+![Github License](https://img.shields.io/github/license/stfc/quantum-protein-folding)
+
 # quantum-protein-folding
 
 A repository to accompany the paper [Quantum Algorithm for Protein Side-Chain Optimisation: Comparing Quantum to Classical Methods](https://arxiv.org/abs/2507.19383) by Anastasia Agathangelou, Dilhan Manawadu, and Ivano Tavernelli.
