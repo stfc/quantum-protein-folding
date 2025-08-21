@@ -1,0 +1,26 @@
+[project]
+name = "quantum-protein-folding"
+version = "0.1.0"
+description = "A project for quantum protein folding simulations."
+authors = [
+    { name = "Dilhan Manawadu" },
+    { name = "Anastasia Agathangelou" },
+    { name = "Ivano Tavernelli" }
+]
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+
+[tool.setuptools]
+packages = ["quantum_protein_folding"]
+
+[project.dependencies]
+python-dotenv = "^1.0.0"
+pyrosetta-installer = "^2023.1.0"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 88

@@ -3,3 +3,4 @@ num_res,num_rot,ground_state,gs_found,CPU calls
 2,2,0101,True,864
 2,2,0101,True,32
 2,2,0101,True,352
+5,5,0100000100000010010000010,False,1569031250

@@ -1,0 +1,4 @@
+num_res,num_rot,alpha,shots,p,ground_state,gs_found,iterations,QPU calls
+4,4,1.0,500,1,1000001010000001,True,1,500
+4,4,1.0,500,1,1000001010000001,True,3,1500
+4,4,1.0,500,1,1000001010000001,False,33,-1
