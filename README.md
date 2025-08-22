@@ -138,7 +138,7 @@ python scripts/run_simulated_annealing.py -res <num_res> -rot <num_rot>
 
 ## Data
 
-Please refer to the `README.md` in `data` directory for more details.
+Please refer to the data [README](https://github.com/stfc/quantum-protein-folding/blob/main/data/README.md) for more information.
 
 ## Authors
 
