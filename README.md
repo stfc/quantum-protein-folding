@@ -159,6 +159,14 @@ Please refer to the data [README](https://github.com/stfc/quantum-protein-foldin
 >}
 > ```
 
+## Acknowledgements
+
+The authors thank Benjamin C. B. Symons for fruitful discussions. We are grateful for the support from the NCCR MARVEL, a National Centre of Competence in Research, funded by the Swiss National Science Foundation (grant number 205602).
+
+This work was supported by the Hartree National Centre for Digital Innovation, a UK Government-funded collaboration between STFC and IBM.
+
+IBM, the IBM logo, and [www.ibm.com](https://ibm.com) are trademarks of International Business Machines Corp., registered in many jurisdictions worldwide. Other product and service names might be trademarks of IBM or other companies. The current list of IBM trademarks is available at [www.ibm.com/legal/copytrade](https://www.ibm.com/legal/copytrade).
+
 ## Version History
 
 * v0.1 - Initial Release
