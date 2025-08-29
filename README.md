@@ -123,6 +123,9 @@ The energy distributions are recorded in `json` format, and saved to `data/proce
 
 ### Running QAOA simulations
 
+> [!IMPORTANT] 
+> For correct execution of `run_qaoa.py` script, it is required to replace some of the the [qiskit-algorithms](https://qiskit-community.github.io/qiskit-algorithms/apidocs/qiskit_algorithms.html) source files. Please refer to the README file in the [src directory](https://github.com/stfc/quantum-protein-folding/tree/main/quantum_protein_folding/src).
+
 Execute:
 ```
 python scripts/run_qaoa.py -res <num_res> -rot <num_rot> -p <num_ansatz_layers> -alpha <CVaR_aggregation> -s <num_shots> -m <simulator>
