@@ -3,6 +3,7 @@
 ![Python Language](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fstfc%2Fquantum-neo-dynamics&label=Repository%20Visits&countColor=%230c7ebe&style=flat&labelStyle=none)
 ![Github License](https://img.shields.io/github/license/stfc/quantum-protein-folding)
+[![DOI](https://zenodo.org/badge/1024934838.svg)](https://doi.org/10.5281/zenodo.17085655)
 
 # quantum-protein-folding
 
