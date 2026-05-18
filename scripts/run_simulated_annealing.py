@@ -6,13 +6,10 @@ from scipy.optimize import dual_annealing
 
 load_project_root()
 
-from quantum_protein_folding.quantum_protein_folding.ising import (
-    get_hamiltonian,
-    get_q_hamiltonian,
-)
+from quantum_protein_folding.quantum_protein_folding.ising import get_hamiltonian
 from quantum_protein_folding.quantum_protein_folding.bitstrings import (
     get_min_energy_bitstring,
-    calculate_bitstring_energies,
+    calculate_energies_numpy_sparse,
 )
 from quantum_protein_folding.quantum_protein_folding.config import (
     EXACT_ENERGY_DATA_DIR,
@@ -54,7 +51,6 @@ def main():
 
     hamiltonian = get_hamiltonian(num_rot=args.num_rot, num_res=args.num_res)
     num_bits = args.num_rot * args.num_res
-    q_hamiltonian = get_q_hamiltonian(num_qubits=num_bits, h_matrix=hamiltonian)
     ground_state_filepath = (
         f"{EXACT_ENERGY_DATA_DIR}/res-{args.num_res}-rot-{args.num_rot}.json"
     )
@@ -64,9 +60,7 @@ def main():
         binary_state = [1 if xi > 0.5 else 0 for xi in x]
         binary_state = "".join(str(digit) for digit in binary_state)
         tracker.calls += 1
-        energy = calculate_bitstring_energies(
-            bitstrings=[binary_state], hamiltonian=q_hamiltonian
-        )[binary_state]
+        energy = calculate_energies_numpy_sparse([binary_state], hamiltonian)[binary_state]
         if binary_state == ground_state_bitstring:
             raise FoundGroundState()
         return energy

@@ -120,7 +120,7 @@ The exact energies can be found by brute-force search over all allowed bitstring
 ```
 python scripts/calculate_bitstring_energies.py -res <num_res> -rot <num_rot>
 ```
-The energy distributions are recorded in `json` format, and saved to `data/processed/exact` directory. Please note that this script uses as input the energy files in `data/processed/pyrosetta/pyrosetta_energy_files_immutable` directory. This can be changed by editing `quantum_protein_folding/quantum_protein_folding/config.py`.
+The energy distributions are recorded in `json` format, and saved to `data/processed/exact` directory. Please note that this script uses as input the energy files in `data/processed/pyrosetta/pyrosetta_energy_files` directory. This can be changed by editing `quantum_protein_folding/quantum_protein_folding/config.py`.
 
 ### Running QAOA simulations
 

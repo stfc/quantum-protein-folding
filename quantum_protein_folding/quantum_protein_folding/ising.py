@@ -1,13 +1,9 @@
 import os
 import sys
-from copy import deepcopy
 import numpy as np
 import pandas as pd
 from qiskit.quantum_info import Pauli, SparsePauliOp
-from .config import (
-    PYROSETTA_ENERGY_IMMUTABLE_FILES_DIR,
-    PYROSETTA_ENERGY_FILES_DIR,
-)
+from .config import PYROSETTA_ENERGY_IMMUTABLE_FILES_DIR
 
 
 def get_hamiltonian(num_rot: int, num_res: int) -> np.ndarray:
@@ -50,18 +46,14 @@ def get_hamiltonian(num_rot: int, num_res: int) -> np.ndarray:
     q = one_body_df["E_ii"].values
     num_qubits = len(q)
 
-    # Load two-body terms
+    # Load two-body terms and build Q using explicit residue/rotamer indices
     two_body_df = pd.read_csv(two_body_file)
-    values = two_body_df["E_ij"].values
+    min_rot_idx = int(one_body_df["rot A_i"].min())
+    qi = (two_body_df["res i"].values - 1) * num_rot + (two_body_df["rot A_i"].values - min_rot_idx)
+    qj = (two_body_df["res j"].values - 1) * num_rot + (two_body_df["rot B_j"].values - min_rot_idx)
     Q = np.zeros((num_qubits, num_qubits))
-
-    idx = 0
-    for j in range(0, num_qubits - num_rot, num_rot):
-        for i in range(j, j + num_rot):
-            for offset in range(num_rot):
-                k = j + num_rot + offset
-                Q[i, k] = Q[k, i] = deepcopy(values[idx])
-                idx += 1
+    Q[qi, qj] = two_body_df["E_ij"].values
+    Q[qj, qi] = two_body_df["E_ij"].values
 
     # Construct Hamiltonian matrix
     H = np.zeros((num_qubits, num_qubits))

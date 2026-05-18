@@ -79,36 +79,37 @@ def build_rotamers(pose, sfxn):
 
 
 def extract_two_body_data(pose, rotsets, ig, num_rot, index):
-    """Return two-body rotomer interaction energies."""
+    """Return two-body rotomer interaction energies for all residue pairs."""
     residue_count = pose.total_residue()
     data_list = []
 
-    for res_i in range(1, residue_count):
-        rot_set_i = rotsets.rotamer_set_for_residue(res_i)
-        rot_set_j = rotsets.rotamer_set_for_residue(res_i + 1)
-        if rot_set_i is None or rot_set_j is None:
-            continue
+    for res_i in range(1, residue_count + 1):
+        for res_j in range(res_i + 1, residue_count + 1):
+            rot_set_i = rotsets.rotamer_set_for_residue(res_i)
+            rot_set_j = rotsets.rotamer_set_for_residue(res_j)
+            if rot_set_i is None or rot_set_j is None:
+                continue
 
-        molten_i = rotsets.resid_2_moltenres(res_i)
-        molten_j = rotsets.resid_2_moltenres(res_i + 1)
+            molten_i = rotsets.resid_2_moltenres(res_i)
+            molten_j = rotsets.resid_2_moltenres(res_j)
 
-        if not ig.find_edge(molten_i, molten_j):
-            continue
+            if not ig.find_edge(molten_i, molten_j):
+                continue
 
-        for rot_i in range(index, index + num_rot):
-            for rot_j in range(index, index + num_rot):
-                energy = ig.get_two_body_energy_for_edge(
-                    molten_i, molten_j, rot_i, rot_j
-                )
-                data_list.append(
-                    {
-                        "res i": res_i,
-                        "res j": res_i + 1,
-                        "rot A_i": rot_i,
-                        "rot B_j": rot_j,
-                        "E_ij": energy,
-                    }
-                )
+            for rot_i in range(index, index + num_rot):
+                for rot_j in range(index, index + num_rot):
+                    energy = ig.get_two_body_energy_for_edge(
+                        molten_i, molten_j, rot_i, rot_j
+                    )
+                    data_list.append(
+                        {
+                            "res i": res_i,
+                            "res j": res_j,
+                            "rot A_i": rot_i,
+                            "rot B_j": rot_j,
+                            "E_ij": energy,
+                        }
+                    )
 
     df = pd.DataFrame(data_list)
     return df, residue_count
@@ -165,7 +166,7 @@ def main():
         f"{PYROSETTA_ENERGY_FILES_DIR}/{args.num_rot}rot_{num_res}res_one_body_terms.csv",
         index=False,
     )
-    print("Energy data saved successfully.")
+    print(f"Energy data saved successfully to {PYROSETTA_ENERGY_FILES_DIR}.")
 
 
 if __name__ == "__main__":
