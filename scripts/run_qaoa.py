@@ -52,6 +52,29 @@ class GroundStateTracker:
             self.iterations += 1
 
 
+class StoppableSampler:
+    """Wraps BackendSampler to skip circuit execution once the ground state is found.
+
+    Once gs_found is True, returns the last cached job instead of submitting new
+    circuits. COBYLA receives a constant energy and converges without firing further shots.
+    """
+
+    def __init__(self, sampler, tracker):
+        self._sampler = sampler
+        self._tracker = tracker
+        self._last_job = None
+
+    def run(self, circuits, parameter_values=None, **run_options):
+        if self._tracker.gs_found and self._last_job is not None:
+            return self._last_job
+        job = self._sampler.run(circuits, parameter_values, **run_options)
+        self._last_job = job
+        return job
+
+    def __getattr__(self, name):
+        return getattr(self._sampler, name)
+
+
 def parse_args():
     """Command line arguments parser."""
     parser = argparse.ArgumentParser(description="Run QAOA with specified parameters.")
@@ -122,6 +145,9 @@ def main():
             backend = "statevector"
     simulator = AerSimulator(method=backend)
 
+    ### ground state tracking
+    tracker = GroundStateTracker(int_ground_state, args)
+
     ### sampler
     backend_options = {
         "seed_simulator": 42,
@@ -130,12 +156,12 @@ def main():
         "resilience_level": 3,
     }
 
-    sampler = BackendSampler(
-        backend=simulator, options=backend_options, bound_pass_manager=PassManager()
+    sampler = StoppableSampler(
+        BackendSampler(
+            backend=simulator, options=backend_options, bound_pass_manager=PassManager()
+        ),
+        tracker,
     )
-
-    ### ground state tracking
-    tracker = GroundStateTracker(int_ground_state, args)
 
     ### qaoa
     qaoa = QAOA(
